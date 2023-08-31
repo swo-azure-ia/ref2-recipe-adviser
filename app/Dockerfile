@@ -11,13 +11,11 @@ RUN apt install python3 python3-pip curl -y
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
-# Install app dependencies
-COPY ./backend/requirements.txt requirements.txt
+RUN mkdir /backend
 
-RUN pip install -r requirements.txt
+COPY ./backend /backend
 
-# Bundle app source
-COPY . .
+RUN pip3 install -r ./backend/requirements.txt
 
 EXPOSE 5000
 CMD [ "flask", "run","--host","0.0.0.0","--port","5000"]

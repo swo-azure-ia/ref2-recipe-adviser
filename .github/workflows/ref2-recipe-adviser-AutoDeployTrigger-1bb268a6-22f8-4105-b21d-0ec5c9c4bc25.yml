@@ -32,7 +32,7 @@ jobs:
       - name: Build and push container image to registry
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}/app
+          appSourcePath: ${{ github.workspace }}/app/backend
           registryUrl: swoaidemoregistry.azurecr.io
           registryUsername: ${{ secrets.REF2RECIPEADVISER_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.REF2RECIPEADVISER_REGISTRY_PASSWORD }}

@@ -40,4 +40,4 @@ jobs:
           resourceGroup: aoai_refer_art_rg
           imageToBuild: swoaidemoregistry.azurecr.io/ref2-recipe-adviser:${{ github.sha }}
           dockerfilePath: Dockerfile
-          environmentVariables: AZURE_OPENAI_GPT_DEPLOYMENT=${{ secrets.AZURE_OPENAI_GPT_DEPLOYMENT }} AZURE_OPENAI_SERVICE=${{ secrets.AZURE_OPENAI_SERVICE }} AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}
+          environmentVariables: AZURE_OPENAI_GPT_DEPLOYMENT=${{ secrets.AZURE_OPENAI_GPT_DEPLOYMENT }} AZURE_OPENAI_SERVICE=${{ secrets.AZURE_OPENAI_SERVICE }} AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}  BASIC_AUTH_PASSWORD=${{ secrets.BASIC_AUTH_PASSWORD }}

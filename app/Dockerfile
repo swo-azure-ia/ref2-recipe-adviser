@@ -1,8 +1,5 @@
 FROM ubuntu:latest
 
-# Create app directory
-WORKDIR /app
-
 ENV AZURE_OPENAI_API_VERSION="2022-12-01"
 ENV AZURE_OPENAI_DALLE_API_VERSION="2023-06-01-preview"
 

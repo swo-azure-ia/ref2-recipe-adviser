@@ -4,8 +4,7 @@ import jwt
 import openai
 from flask import Flask, request, jsonify, render_template, send_from_directory
 from dotenv import load_dotenv
-from flask_httpauth import HTTPBasicAuth
-from werkzeug.security import generate_password_hash, check_password_hash
+
 
 # Food Menu
 from food_menu.food_receipe import get_food_receipe
@@ -44,21 +43,6 @@ openai.api_key = AZURE_OPENAI_API_KEY
 # openai.api_key = openai_token.token
 
 app = Flask(__name__)
-auth = HTTPBasicAuth()
-
-# Basic auth user
-BASIC_AUTH_USER = os.environ.get("BASIC_AUTH_USER")
-BASIC_AUTH_PASSWORD = os.environ.get("BASIC_AUTH_PASSWORD")
-users = {
-    BASIC_AUTH_USER: generate_password_hash(BASIC_AUTH_PASSWORD)
-}
-
-
-@auth.verify_password
-def verify_password(username, password):
-    if username in users and \
-            check_password_hash(users.get(username), password):
-        return username
 
 
 def get_user_name(req: request):
@@ -76,14 +60,12 @@ def get_user_name(req: request):
 
 
 @app.route("/")
-@auth.login_required
 def index():
     user_name = get_user_name(request)
     return render_template("food_menu.html", user_name=user_name)
 
 
 @app.route("/food_receipe", methods=["POST"])
-@auth.login_required
 def food_receipe():
     try:
         print(openai.api_base, flush=True)
@@ -102,7 +84,6 @@ def food_receipe():
 
 
 @app.route("/food_advisory", methods=["POST"])
-@auth.login_required
 def food_advisory():
     try:
         family_profile = request.json["family_profile"]
@@ -118,7 +99,6 @@ def food_advisory():
 
 
 @app.route("/food_image", methods=["POST"])
-@auth.login_required
 def food_image():
     try:
         food_name = request.json["food_name"]
